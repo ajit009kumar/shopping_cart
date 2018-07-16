@@ -2,11 +2,20 @@ import React, { Component } from 'react';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import CartView from './views/CartView';
+import Login from './views/Login';
 import { applyMiddleware, createStore } from 'redux';
 import thunk from 'redux-thunk';
 import logger from 'redux-logger';
 import { Provider } from 'react-redux';
 import reducers from "./reducers";
+import {
+  BrowserRouter as Router,
+  Route,
+  Link,
+  Redirect,
+  withRouter
+} from 'react-router-dom';
+
 
 injectTapEventPlugin();
 
@@ -19,7 +28,12 @@ class App extends Component {
     return (
       <Provider store={store}>
         <MuiThemeProvider>
-            <CartView />
+        <Router>
+          <div>
+            <Route exact path = "/" component = {Login} />
+            <Route  exact path="/cart" component={CartView}  /> 
+          </div>
+        </Router>
         </MuiThemeProvider>
       </Provider>
     );
